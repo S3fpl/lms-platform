@@ -40,7 +40,7 @@ const Dashboardlayout = ({
                 <Sidebar isExpanded={isExpanded} onToggle={handleToggle} />
             </div>
             <main
-                className=" h-full transition-all duration-300"
+                className=" h-full transition-all duration-300 mt-20 pl-2 "
                 style={{ marginLeft: isExpanded ? SIDEBAR_EXPANDED_WIDTH : SIDEBAR_COLLAPSED_WIDTH }}
             >
                 {children}
