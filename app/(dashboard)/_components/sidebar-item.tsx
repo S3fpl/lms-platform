@@ -1,61 +1,71 @@
-"use client";
+'use client'
 
-import { cn } from "@/lib/utils";
-import { LucideIcon } from "lucide-react";
-import { usePathname, useRouter } from "next/navigation";
+import { cn } from "@/lib/utils"
+import { LucideIcon } from "lucide-react"
+import { usePathname, useRouter } from "next/navigation"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
 interface SidebarItemProps {
-    icon: LucideIcon;
-    label: string;
-    href: string;
+    icon: LucideIcon
+    label: string
+    href: string
+    isExpanded: boolean
 }
 
 const SidebarItem = ({
     icon: Icon,
     label,
     href,
+    isExpanded,
 }: SidebarItemProps) => {
-    const pathname = usePathname();
-    const router = useRouter();
+    const pathname = usePathname()
+    const router = useRouter()
 
     const isActive =
         (pathname === "/" && href === "/") ||
         pathname === href ||
-        pathname?.startsWith(`${href}/`);
+        pathname?.startsWith(`${href}/`)
 
     const onClick = () => {
-        router.push(href);
-    };
+        router.push(href)
+    }
 
-    return (
+    const content = (
         <button
             onClick={onClick}
             type="button"
             className={cn(
-                "flex items-center gap-x-2 text-white text-sm font-medium pl-6 pr-3 py-3 transition-all duration-200",
+                "flex items-center text-white text-sm font-medium py-3 transition-all duration-200 w-full",
+                isExpanded ? "pl-6 pr-3 gap-x-3 justify-start" : "px-4 justify-center",
                 "hover:bg-white/10 hover:text-white/90",
-                isActive &&
-                "bg-white/10 text-white/90 hover:bg-white/20"
+                isActive && "bg-white/10 text-white/90 hover:bg-white/20"
             )}
         >
-            <div className="flex items-center gap-x-2">
-                <Icon
-                    size={20}
-                    className={cn(
-                        "text-white/70",
-                        isActive && "text-white/90"
-                    )}
-                />
-                {label}
-            </div>
-            <div
+            <Icon
+                size={20}
                 className={cn(
-                    "ml-auto  border-2 border-white rounded-full h-full transition-all",
-                    isActive ? "opacity-100" : "opacity-0"
+                    "text-white/70",
+                    isActive && "text-white/90"
                 )}
             />
+            {isExpanded && <span>{label}</span>}
         </button>
-    );
-};
+    )
 
-export default SidebarItem;
+    return (
+        <TooltipProvider>
+            <Tooltip>
+                <TooltipTrigger asChild>
+                    {content}
+                </TooltipTrigger>
+                {!isExpanded && (
+                    <TooltipContent side="right" sideOffset={8} className="bg-white/10 text-white text-sm px-3 py-1 rounded-md backdrop-blur-md border border-white/20 ">
+                        {label}
+                    </TooltipContent>
+                )}
+            </Tooltip>
+        </TooltipProvider>
+    )
+}
+
+export default SidebarItem

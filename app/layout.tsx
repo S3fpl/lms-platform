@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
-import ResponsiveNav from '@/components/Home/Navbar/ResponsiveNav'
+// import ResponsiveNav from '@/components/Home/Navbar/ResponsiveNav'
 import "./globals.css";
 
 const geistSans = Geist({
@@ -17,9 +17,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Gakuen | Feature & Tech Courses",
   description: "Powered by Gakuen – Elevating future tech minds.",
-  // icons:{
-  //   icon: "/favicon.ico",
-  // }
+  
 };
 
 const RootLayout = ({
@@ -38,7 +36,7 @@ const RootLayout = ({
             <div className="absolute w-[1000px] h-[1000px] bg-purple-700 opacity-20 blur-[200px] rounded-full bottom-[-300px] right-[-250px] animate-[pulse_6s_ease-in-out_infinite] delay-[2000ms]" />
           </div>
 
-          <ResponsiveNav />
+          {/* <ResponsiveNav /> */}
 
           <main className="">
             {children}

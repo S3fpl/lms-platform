@@ -1,7 +1,8 @@
-"use client";
+'use client'
+
 import React from 'react'
-import { Compass, Home, Layout } from 'lucide-react';
-import SidebarItem from './sidebar-item';
+import { Compass, Home } from 'lucide-react'
+import SidebarItem from './sidebar-item'
 
 const guestRoutes = [
     {
@@ -10,28 +11,22 @@ const guestRoutes = [
         href: '/',
     },
     {
-        icon: Layout,
-        label: 'Dashboard',
-        href: '/dashboard',
-    },
-    {
         icon: Compass,
-        label: 'Browes',
+        label: 'Browse',
         href: '/search',
-    }
+    },
 ]
 
-const SidebarRoutes = () => {
-    const routes = guestRoutes;
-
+const SidebarRoutes = ({ isExpanded }: { isExpanded: boolean }) => {
     return (
-        <div className='flex flex-col w-full'>
-            {routes.map((route) => (
+        <div className="flex flex-col w-full">
+            {guestRoutes.map((route) => (
                 <SidebarItem
                     key={route.label}
                     icon={route.icon}
                     label={route.label}
                     href={route.href}
+                    isExpanded={isExpanded}
                 />
             ))}
         </div>
