@@ -17,6 +17,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Gakuen | Feature & Tech Courses",
   description: "Powered by Gakuen – Elevating future tech minds.",
+  // icons:{
+  //   icon: "/favicon.ico",
+  // }
 };
 
 const RootLayout = ({
@@ -37,7 +40,9 @@ const RootLayout = ({
 
           <ResponsiveNav />
 
-          <main className="min-h-screen pt-4 px-4 md:px-12">{children}</main>
+          <main className="">
+            {children}
+            </main>
         </body>
       </html>
     </ClerkProvider>

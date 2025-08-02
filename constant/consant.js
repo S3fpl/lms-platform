@@ -20,3 +20,4 @@ export const Navlinks = [
         label: "Contact",
     },
 ];
+

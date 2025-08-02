@@ -26,19 +26,16 @@ const ResponsiveNav = () => {
     }, [])
 
     return (
-        <header className="w-full h-[12vh] px-4 md:px-12 flex items-center justify-between z-50">
-            {/* Logo - Left */}
-            <div className="text-white font-semibold text-xl">Gakuen</div>
-
-            {/* Center Nav - desktop only */}
+        <header className="relative w-full h-[12vh] px-4 md:px-12 flex items-center justify-between z-50">
+            {/* Nav center */}
             {!isMobile && (
-                <div className="absolute left-1/2 transform -translate-x-1/2">
+                <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
                     <Nav />
                 </div>
             )}
 
-            {/* Right side - Auth buttons or menu */}
-            <div className="flex items-center gap-4">
+            {/* Right - Auth buttons or MobileNav */}
+            <div className="ml-auto flex items-center gap-4">
                 {isMobile ? (
                     <MobileNav />
                 ) : (
