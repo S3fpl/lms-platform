@@ -5,7 +5,7 @@ import React from 'react'
 const CoursesPage = () => {
   return (
     <div className='p-6'>
-      <Link href={`/dashboard/new`} className='mb-4'>
+      <Link href={`/dashboard/create`} className='mb-4'>
       <Button>
         New Course
       </Button>

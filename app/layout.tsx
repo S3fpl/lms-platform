@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 // import ResponsiveNav from '@/components/Home/Navbar/ResponsiveNav'
 import "./globals.css";
+import ToasterProvider from "@/components/providers/toaster-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,8 +38,8 @@ const RootLayout = ({
           </div>
 
           {/* <ResponsiveNav /> */}
-
-          <main className="">
+          <main>
+            <ToasterProvider />
             {children}
             </main>
         </body>
