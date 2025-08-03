@@ -11,13 +11,18 @@ import {
     UserButton,
 } from '@clerk/nextjs'
 
-import { useUser } from '@clerk/nextjs';
-import { LayoutDashboard } from 'lucide-react';
-import Link from 'next/link';
+import { useUser } from '@clerk/nextjs'
+import { LayoutDashboard, ArrowLeft } from 'lucide-react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 const ResponsiveNav = () => {
     const [isMobile, setIsMobile] = useState(false)
-    const { user, isLoaded } = useUser();
+    const { user, isLoaded } = useUser()
+    const pathname = usePathname()
+
+    // ✅ نتحقق إذا كان المسار ضمن /dashboard بأي صفحة
+    const isDashboardPage = pathname?.startsWith('/dashboard')
 
     useEffect(() => {
         const handleResize = () => {
@@ -45,17 +50,27 @@ const ResponsiveNav = () => {
                     <MobileNav />
                 ) : (
                     <>
-                        {/* Dashboard button for admin only */}
+                        {/* Dashboard / Exit button for admin only */}
                         {isLoaded && user?.publicMetadata?.role === 'admin' && (
                             <Link
-                                href="/dashboard"
+                                href={isDashboardPage ? '/' : '/dashboard'}
                                 className="flex items-center gap-2 text-white bg-white/10 hover:bg-white/20 rounded-xl border border-white/30 transition-all duration-300 cursor-pointer px-4 py-2 text-sm"
-                                style={{ textDecoration: 'none' }}
                             >
-                                <LayoutDashboard size={18} />
-                                Dashboard
+                                {isDashboardPage ? (
+                                    <>
+                                        <ArrowLeft size={18} />
+                                        Exit
+                                    </>
+                                ) : (
+                                    <>
+                                        <LayoutDashboard size={18} />
+                                        Dashboard
+                                    </>
+                                )}
                             </Link>
                         )}
+
+                        {/* Auth buttons */}
                         <SignedOut>
                             <SignInButton mode="modal">
                                 <button className="text-white bg-white/10 hover:bg-white/20 rounded-xl border border-white/30 transition-all duration-300 cursor-pointer px-4 py-2 text-sm">
@@ -69,6 +84,7 @@ const ResponsiveNav = () => {
                             </SignUpButton>
                         </SignedOut>
 
+                        {/* User Avatar */}
                         <SignedIn>
                             <UserButton
                                 appearance={{

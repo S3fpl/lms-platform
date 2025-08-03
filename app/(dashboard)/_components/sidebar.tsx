@@ -12,7 +12,7 @@ interface SidebarProps {
 const Sidebar = ({ isExpanded, onToggle }: SidebarProps) => {
   return (
     <div
-      className={`h-full border-r flex flex-col overflow-y-auto bg-white/10 backdrop-blur-lg border-white/30 shadow-sm transition-all duration-300 ${isExpanded ? 'w-64' : 'w-20'}`}
+      className={`h-full border-r flex flex-col overflow-y-auto bg-white/10 backdrop-blur-lg border-white/30 shadow-sm transition-all duration-300 over ${isExpanded ? 'w-64' : 'w-16'}`}
     >
       <div
         className="flex justify-center py-4 cursor-pointer transition-all"
