@@ -30,7 +30,7 @@ const RootLayout = ({
     <ClerkProvider>
       <html lang="en">
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[hsl(245,58%,4%)] text-white relative overflow-hidden`}
+          className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[hsl(245,58%,4%)] text-white relative `}
         >
           <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none ">
             <div className="absolute w-[900px] h-[900px] bg-indigo-600 opacity-20 blur-[180px] rounded-full top-[-200px] left-[-200px] animate-[pulse_6s_ease-in-out_infinite]" />
