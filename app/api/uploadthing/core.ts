@@ -1,21 +1,28 @@
-// import { auth } from "@clerk/nextjs/server";
-// import { createUploadthing, type FileRouter } from "uploadthing/next";
-// import { UploadThingError } from "uploadthing/server";
+import { auth } from "@clerk/nextjs/server";
+import { createUploadthing, type FileRouter } from "uploadthing/next";
+import { UploadThingError } from "uploadthing/server";
 
-// const f = createUploadthing();
+const f = createUploadthing();
 
-// const HandleAuth = () => {
-//     const { userId } =  auth();
-//     if (!userId) throw new UploadThingError("Unauthorized");
-//     return { userId };
-// }
+// دالة موحدة للتحقق من تسجيل الدخول
+const getAuthOrThrow = async () => {
+    const { userId } = await auth();
+    if (!userId) throw new UploadThingError("Unauthorized");
+    return { userId };
+};
 
-// export const ourFileRouter = {
-//     courseImage: f({ image:{ maxFileSize: "4MB", maxFileCount: 1} })
-//         .middleware(()=> auth())
-//         .onUploadComplete(()=> {})
-//         courseAttachments: f(["text", "image", "video", "audio" , "pdf"])
-//         .middleware(()=> handleAuth())
-// } satisfies FileRouter;
+export const ourFileRouter = {
+    courseImage: f({ image: { maxFileSize: "4MB", maxFileCount: 1 } })
+        .middleware(async () => await getAuthOrThrow())
+        .onUploadComplete(() => { }),
 
-// export type OurFileRouter = typeof ourFileRouter;
+    courseAttachments: f(["text", "image", "video", "audio", "pdf"])
+        .middleware(async () => await getAuthOrThrow())
+        .onUploadComplete(() => { }),
+
+    chapterVideo: f({ video: { maxFileSize: "128MB", maxFileCount: 1 } })
+        .middleware(async () => await getAuthOrThrow())
+        .onUploadComplete(() => { }),
+} satisfies FileRouter;
+
+export type OurFileRouter = typeof ourFileRouter;
